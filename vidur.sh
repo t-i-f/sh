@@ -1,0 +1,1 @@
+find . -type f \( -name "*.mp4" -o -name "*.mkv" -o -name "*.avi" -o -name "*.mov" \) -print0 | xargs -0 -n1 ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 | awk '{ sum += $1 } END { printf "%d:%02d:%02d\n", sum/3600, sum%3600/60, sum%60 }'
